@@ -43,7 +43,7 @@ public class ProductPactProviderTest {
       return new SelectorBuilder()
         .deployedOrReleased()
         .mainBranch()
-        .branch("step11");
+        .branch("feature/change-some-url");
     }
     @LocalServerPort
     int port;
