@@ -27,16 +27,16 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @Provider("ProductService")
-//@PactFolder("pacts")
 @PactBroker(
-        url = "https://energypool.pactflow.io",
-        authentication = @PactBrokerAuth(token = "k4JTbgzFTLIBtwTpFjK5ww")
+        host = "localhost",
+        port = "8000",
+        authentication = @PactBrokerAuth(username = "pact_workshop", password = "pact_workshop")
 )
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ProductPactProviderTest {
-    /*@au.com.dius.pact.provider.junitsupport.loader.PactBrokerConsumerVersionSelectors
+    @au.com.dius.pact.provider.junitsupport.loader.PactBrokerConsumerVersionSelectors
     public static SelectorBuilder consumerVersionSelectors() {
       // Select Pacts for consumers deployed or released to production, those on the main branch
       // and those on a named branch step11, for use in our workshop
@@ -44,7 +44,7 @@ public class ProductPactProviderTest {
         .deployedOrReleased()
         .mainBranch()
         .branch("step11");
-    }*/
+    }
     @LocalServerPort
     int port;
 

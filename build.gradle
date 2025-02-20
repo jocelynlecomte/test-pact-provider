@@ -26,6 +26,33 @@ dependencies {
     testImplementation("au.com.dius.pact.provider:junit5:4.6.5")
 }
 
-tasks.named('test') {
+def getGitHash = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    print 'Git hash: ' + stdout.toString().trim()
+    return stdout.toString().trim()
+}
+
+def getGitBranch = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
+        standardOutput = stdout
+    }
+    print 'Git branch: ' + stdout.toString().trim()
+    return stdout.toString().trim()
+}
+
+test {
     useJUnitPlatform()
+
+    systemProperty 'pact.provider.branch', getGitBranch()
+    if (System.getProperty('pactPublishResults') == 'true') {
+        print "Publishing verification results"
+        systemProperty 'pact.provider.version', getGitHash()
+        systemProperty 'pact.verifier.publishResults', 'true'
+    }
 }
