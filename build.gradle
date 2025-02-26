@@ -50,9 +50,9 @@ test {
     useJUnitPlatform()
 
     systemProperty 'pact.provider.branch', getGitBranch()
-    if (System.getProperty('pactPublishResults') == 'true') {
+    //if (System.getProperty('pactPublishResults') == 'true') {
         print "Publishing verification results"
         systemProperty 'pact.provider.version', getGitHash()
         systemProperty 'pact.verifier.publishResults', 'true'
-    }
+    //}
 }

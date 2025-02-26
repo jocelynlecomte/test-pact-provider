@@ -41,9 +41,8 @@ public class ProductPactProviderTest {
       // Select Pacts for consumers deployed or released to production, those on the main branch
       // and those on a named branch step11, for use in our workshop
       return new SelectorBuilder()
-        .deployedOrReleased()
-        .mainBranch()
-        .branch("feature/change-some-url");
+        .matchingBranch()
+        .mainBranch();
     }
     @LocalServerPort
     int port;
